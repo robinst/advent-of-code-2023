@@ -14,7 +14,11 @@ public class Resources {
         return Files.readAllLines(Path.of(Objects.requireNonNull(resource).toURI()));
     }
 
-    public static String readString(URL resource) throws IOException, URISyntaxException {
-        return Files.readString(Path.of(Objects.requireNonNull(resource).toURI()));
+    public static String readString(URL resource) {
+        try {
+            return Files.readString(Path.of(Objects.requireNonNull(resource).toURI()));
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
