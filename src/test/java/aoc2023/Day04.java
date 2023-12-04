@@ -29,7 +29,7 @@ public class Day04 {
 
     static int solve2(String input) {
         var cardWins = new LinkedHashMap<Integer, Integer>();
-        var cardCoounts = new HashMap<Integer, Integer>();
+        var cardCounts = new HashMap<Integer, Integer>();
 
         var lines = input.split("\n");
         for (int i = 0; i < lines.length; i++) {
@@ -40,23 +40,24 @@ public class Day04 {
             var scratched = Parsing.numbers(sides[1]);
             var matching = new HashSet<>(winners);
             matching.retainAll(scratched);
+
             cardWins.put(i, matching.size());
-            cardCoounts.put(i, 1);
+            cardCounts.put(i, 1);
         }
 
         for (var entry : cardWins.entrySet()) {
             var cardIndex = entry.getKey();
-            var count = cardCoounts.get(cardIndex);
+            var count = cardCounts.get(cardIndex);
             var winningNumbers = entry.getValue();
 
             if (winningNumbers > 0) {
                 for (int i = cardIndex + 1; i <= cardIndex + winningNumbers; i++) {
-                    cardCoounts.put(i, cardCoounts.get(i) + count);
+                    cardCounts.put(i, cardCounts.get(i) + count);
                 }
             }
         }
 
-        return cardCoounts.values().stream().mapToInt(Integer::intValue).sum();
+        return cardCounts.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     @Test
