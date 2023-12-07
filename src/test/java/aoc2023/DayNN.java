@@ -6,29 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DayNN {
 
-    static int solve1(String input) {
+    static long solve1(String input) {
         var result = 0;
         return result;
     }
 
-    static int solve2(String input) {
+    static long solve2(String input) {
         var result = 0;
         return result;
     }
 
     @Test
-    void example1() {
+    void example() {
         var s = """
                 
                 """;
         assertEquals(0, solve1(s));
-    }
-
-    @Test
-    void example2() {
-        var s = """
-                
-                """;
         assertEquals(0, solve2(s));
     }
 
