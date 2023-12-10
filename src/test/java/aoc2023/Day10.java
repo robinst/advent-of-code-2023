@@ -101,6 +101,15 @@ public class Day10 {
         return furthest - 1;
     }
 
+    // How this works:
+    // 1. Keep two sets of positions (one is going to be outside, the other inside, don't know yet)
+    // 2. Go through the main loop in one direction (similar to part 1, but only go one way)
+    // 3. When going from one pipe to the next, look at the neighbours of that pipe starting from the direction
+    //    we came in; stop at the direction the pipe goes out.
+    //    - Do that clockwise and put the resulting positions into the first set
+    //    - Do the same anti-clockwise and put results into second set
+    // 4. After we've gone through the main loop, do bucket fill for both sets,
+    //    return the count of the set that doesn't leak to outside the map
     static long solve2(String input) {
         var puzzle = parse(input);
         var start = puzzle.start();
