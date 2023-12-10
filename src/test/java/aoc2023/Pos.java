@@ -22,7 +22,7 @@ public record Pos(int x, int y) {
     }
 
     List<Pos> neighbors() {
-        return Arrays.asList(new Pos(x(), y() + 1), new Pos(x() + 1, y()), new Pos(x(), y() - 1), new Pos(x() - 1, y()));
+        return List.of(new Pos(x(), y() + 1), new Pos(x() + 1, y()), new Pos(x(), y() - 1), new Pos(x() - 1, y()));
     }
 
     List<Pos> straightLineToIncluding(Pos to) {
