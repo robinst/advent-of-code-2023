@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DayNN {
 
     static long solve1(String input) {
-        var result = 0;
+        var result = 0L;
         return result;
     }
 
     static long solve2(String input) {
-        var result = 0;
+        var result = 0L;
         return result;
     }
 
