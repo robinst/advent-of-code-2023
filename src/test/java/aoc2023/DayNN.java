@@ -2,6 +2,8 @@ package aoc2023;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DayNN {
