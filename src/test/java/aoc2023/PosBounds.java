@@ -30,4 +30,8 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
     public int height() {
         return maxY - minY + 1;
     }
+
+    public boolean contains(Pos pos) {
+        return pos.x() >= minX && pos.x() <= maxX && pos.y() >= minY && pos.y() <= maxY;
+    }
 }
