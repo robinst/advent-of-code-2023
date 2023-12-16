@@ -33,4 +33,10 @@ public class DayNN {
         assertEquals(0, solve1(input));
         assertEquals(0, solve2(input));
     }
+
+    void imports() {
+        List<Integer> list = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+    }
 }
