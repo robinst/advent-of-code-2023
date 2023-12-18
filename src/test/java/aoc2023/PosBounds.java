@@ -1,6 +1,8 @@
 package aoc2023;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
@@ -29,6 +31,15 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
     public int height() {
         return maxY - minY + 1;
+    }
+
+    public List<Pos> borderInside() {
+        var border = new ArrayList<Pos>();
+        border.addAll(new Pos(minX, minY).straightLineToIncluding(new Pos(maxX, minY)));
+        border.addAll(new Pos(maxX, minY).straightLineToIncluding(new Pos(maxX, maxY)));
+        border.addAll(new Pos(maxX, maxY).straightLineToIncluding(new Pos(minX, maxY)));
+        border.addAll(new Pos(minX, maxY).straightLineToIncluding(new Pos(minX, minY)));
+        return border;
     }
 
     public boolean contains(Pos pos) {
