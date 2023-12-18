@@ -118,7 +118,7 @@ public class Day18 {
 
     static long calculate2(List<Instruction> instructions) {
         var current = new Pos(0, 0);
-        var rows = new TreeMap<Integer, TreeSet<Row>>();
+        var rows = new TreeMap<Integer, Set<Row>>();
         for (int i = 0; i < instructions.size(); i++) {
             var instruction = instructions.get(i);
             var steps = instruction.steps();
@@ -135,14 +135,23 @@ public class Day18 {
                 int width = Math.abs(current.x() - destination.x()) + 1;
                 var prev = instructions.get(Math.floorMod(i - 1, instructions.size()));
                 var next = instructions.get(Math.floorMod(i + 1, instructions.size()));
-                rows.computeIfAbsent(current.y(), k -> new TreeSet<>()).add(new Row(x, width, prev.direction() == next.direction()));
+                // If prev and next direction are equal (e.g. both UP or both DOWN), that means it looks like this:
+                //    #
+                // ####
+                // #
+                // In which case we do want to swap inside/outside. If they're different directions,
+                // then it's a U shape in which case we don't want to swap.
+                var row = new Row(x, width, prev.direction() == next.direction());
+                rows.computeIfAbsent(current.y(), k -> new TreeSet<>()).add(row);
             } else {
-                // Vertical, insert N rows each 1 wide
+                // Vertical, insert N rows each 1 wide. Don't add beginning and end because otherwise we'd be
+                // double counting it with the horizontal one.
                 int x = current.x();
                 int fromY = Math.min(current.y(), destination.y()) + 1;
                 int toY = Math.max(current.y(), destination.y()) - 1;
                 for (int y = fromY; y <= toY; y++) {
-                    rows.computeIfAbsent(y, k -> new TreeSet<>()).add(new Row(x, 1, true));
+                    var row = new Row(x, 1, true);
+                    rows.computeIfAbsent(y, k -> new TreeSet<>()).add(row);
                 }
             }
 
@@ -151,7 +160,7 @@ public class Day18 {
 
         var result = 0L;
 
-        for (Map.Entry<Integer, TreeSet<Row>> entry : rows.entrySet()) {
+        for (Map.Entry<Integer, Set<Row>> entry : rows.entrySet()) {
             var inside = false;
             Integer previous = null;
             for (Row row : entry.getValue()) {
@@ -167,6 +176,35 @@ public class Day18 {
         }
 
         return result;
+    }
+
+    // Added this later. Need to remember this, very useful.
+    static long shoelaceFormula(List<Instruction> instructions) {
+        var current = new Pos(0, 0);
+        var points = new ArrayList<Pos>();
+
+        var perimeter = 0L;
+
+        for (Instruction instruction : instructions) {
+            var steps = instruction.steps();
+            var destination = switch (instruction.direction()) {
+                case U -> current.plus(new Pos(0, -steps));
+                case R -> current.plus(new Pos(steps, 0));
+                case D -> current.plus(new Pos(0, steps));
+                case L -> current.plus(new Pos(-steps, 0));
+            };
+            perimeter += steps;
+            points.add(destination);
+            current = destination;
+        }
+
+        var sum = 0L;
+        for (int i = 0; i < points.size(); i++) {
+            var a = points.get(i);
+            var b = points.get((i + 1) % points.size());
+            sum += ((long) a.x() * b.y()) - ((long) a.y() * b.x());
+        }
+        return (perimeter + sum) / 2 + 1;
     }
 
     @Test
@@ -190,6 +228,7 @@ public class Day18 {
         var instructions = parse1(s);
         assertEquals(62, calculate1(instructions));
         assertEquals(62, calculate2(instructions));
+        assertEquals(62, shoelaceFormula(instructions));
         assertEquals(952408144115L, solve2(s));
     }
 
@@ -198,5 +237,6 @@ public class Day18 {
         var input = Resources.readString(Resources.class.getResource("/day18.txt"));
         assertEquals(95356, solve1(input));
         assertEquals(92291468914147L, solve2(input));
+        assertEquals(92291468914147L, shoelaceFormula(parse2(input)));
     }
 }
