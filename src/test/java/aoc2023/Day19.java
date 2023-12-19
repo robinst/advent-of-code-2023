@@ -148,7 +148,7 @@ public class Day19 {
             var rule = workflow.rules().get(state.rule());
             var partMatch = state.partMatch();
             if (rule.condition() == null) {
-                // No split
+                // No split (only true parts)
                 if (rule.destination().equals("A")) {
                     acceptedRanges.add(partMatch);
                 } else if (!rule.destination().equals("R")) {
@@ -161,7 +161,7 @@ public class Day19 {
                 var splits = switch (rule.condition()) {
                     case GreaterThan(var value) -> {
                         var parts = range.split(value + 1);
-                        yield new Range[]{parts[1], parts[0]}; //{
+                        yield new Range[]{parts[1], parts[0]};
                     }
                     case LessThan(var value) -> range.split(value);
                 };
