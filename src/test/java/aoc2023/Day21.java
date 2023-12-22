@@ -194,6 +194,58 @@ public class Day21 {
         }
     }
 
+    static long calculate2Polynomial(Map<Pos, Plot> map, int steps) {
+        var bounds = PosBounds.calculate(map.keySet());
+        var origin = map.entrySet().stream().filter(e -> e.getValue() == Plot.START).findFirst().get().getKey();
+
+        int width = bounds.width();
+        System.out.println(origin.x());
+        System.out.println(width);
+
+        var sequence = new ArrayList<Long>();
+        sequence.add((long) calculateInfinite(map, bounds, origin, origin.x()));
+        sequence.add((long) calculateInfinite(map, bounds, origin, origin.x() + width));
+        sequence.add((long) calculateInfinite(map, bounds, origin, origin.x() + width * 2));
+        sequence.add((long) calculateInfinite(map, bounds, origin, origin.x() + width * 3));
+
+        // Can actually take these numbers and put them into Wolfram Alpha to get the formula,
+        // then calculate with N.
+        System.out.println(sequence);
+        System.out.println(Day09.extrapolate(sequence, List.of(), Day09.Edge.LAST));
+
+        var n = steps / width - sequence.size() + 1;
+        System.out.println("Total steps: " + n);
+        for (int i = 0; i < n; i++) {
+            if (i % 1000 == 0) {
+                System.out.println("i: " + i);
+            }
+            sequence.add(Day09.extrapolate(sequence, List.of(), Day09.Edge.LAST));
+        }
+
+        return sequence.getLast();
+    }
+
+    static int calculateInfinite(Map<Pos, Plot> map, PosBounds bounds, Pos start, int steps) {
+        var positions = new HashSet<Pos>();
+        positions.add(start);
+        for (int i = 0; i < steps; i++) {
+            var newPositions = new HashSet<Pos>();
+            for (Pos position : positions) {
+                for (Pos neighbor : position.neighbors()) {
+                    var x = Math.floorMod(neighbor.x(), bounds.width());
+                    var y = Math.floorMod(neighbor.y(), bounds.height());
+                    var plot = map.get(new Pos(x, y));
+
+                    if (plot.canGo()) {
+                        newPositions.add(neighbor);
+                    }
+                }
+            }
+            positions = newPositions;
+        }
+        return positions.size();
+    }
+
     static Map<Pos, Plot> parse(String input) {
         return Grids.parse(input, s -> switch (s) {
             case "S" -> Plot.START;
@@ -231,5 +283,7 @@ public class Day21 {
         var input = Resources.readString(Resources.class.getResource("/day21.txt"));
         assertEquals(3729, solve1(input));
         assertEquals(621289922886149L, solve2(input));
+        // Alternative solution using polynomial sequence.
+        assertEquals(621289922886149L, calculate2Polynomial(parse(input), 26501365));
     }
 }
