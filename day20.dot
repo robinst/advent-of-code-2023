@@ -1,120 +1,170 @@
 digraph {
-rankdir="LR"
-broadcaster -> { tb dv qg lf }
-
-th [label="%th"]
-dx [label="%dx"]
-lj [label="%lj"]
-tt [label="%tt"]
-bv [label="%bv"]
-nb [label="%nb"]
-jv [label="%jv"]
-sg [label="%sg"]
-fc [label="%fc"]
-tr [label="&tr"]
-sm [label="%sm"]
-pd [label="%pd"]
-sj [label="%sj"]
-lp [label="%lp"]
-nn [label="%nn"]
-bh [label="%bh"]
-lg [label="%lg"]
-gv [label="%gv"]
-sc [label="%sc"]
-qg [label="%qg"]
-dv [label="%dv"]
-cp [label="%cp"]
-cx [label="%cx"]
-xc [label="%xc"]
-kf [label="%kf"]
-gp [label="%gp"]
-nc [label="%nc"]
-vs [label="%vs"]
-bs [label="%bs"]
-xv [label="%xv"]
-mc [label="%mc"]
-kk [label="%kk"]
-ng [label="%ng"]
-mz [label="%mz"]
-bt [label="%bt"]
-ln [label="%ln"]
-hb [label="%hb"]
-lf [label="%lf"]
-xm [label="&xm"]
-mf [label="%mf"]
-dr [label="&dr"]
-jx [label="&jx"]
-bk [label="%bk"]
-gk [label="%gk"]
-tn [label="&tn"]
-qm [label="%qm"]
-ps [label="%ps"]
-tz [label="%tz"]
-nv [label="%nv"]
-ml [label="%ml"]
-nh [label="&nh"]
-tb [label="%tb"]
-qb [label="%qb"]
-bm [label="%bm"]
-vc [label="&vc"]
-hd [label="&hd"]
-dh [label="&dh"]
-
-th -> { gv }
-dx -> { jx vs }
-lj -> { hd cx }
-tt -> { lp tn }
-bv -> { ml jx }
-nb -> { vc hb }
-jv -> { xc }
-sg -> { gk hd }
-fc -> { tt }
-tr -> { dh }
-sm -> { jv }
-pd -> { tn bm }
-sj -> { ln hd }
-lp -> { tn ng }
-nn -> { nv }
-bh -> { hd cp }
-lg -> { tz vc }
-gv -> { vc bk }
-sc -> { hd }
-qg -> { sj hd }
-dv -> { jx sm }
-cp -> { sc hd }
-cx -> { bh }
-xc -> { dx }
-kf -> { bv }
-gp -> { tn nn }
-nc -> { kk vc }
-vs -> { qm jx }
-bs -> { lj }
-xv -> { mz }
-mc -> { vc }
-kk -> { nb }
-ng -> { gp }
-mz -> { fc }
-bt -> { jx }
-ln -> { ps }
-hb -> { vc mf }
-lf -> { tn xv }
-xm -> { dh }
-mf -> { lg }
-dr -> { dh }
-jx -> { sm jv xc qm dv nh kf }
-bk -> { nc }
-gk -> { bs }
-tn -> { lf xv xm nn mz fc ng }
-qm -> { kf }
-ps -> { hd sg }
-tz -> { vc mc }
-nv -> { pd tn }
-ml -> { qb jx }
-nh -> { dh }
-tb -> { vc th }
-qb -> { bt jx }
-bm -> { tn }
-vc -> { tb mf dr th kk bk }
-hd -> { bs gk tr qg ln cx }
-dh -> { rx }
+  rankdir="LR"
+  tt [label="%tt"]
+  ln [label="%ln"]
+  ps [label="%ps"]
+  broadcaster [label="broadcaster"]
+  lp [label="%lp"]
+  dh [label="&dh"]
+  tz [label="%tz"]
+  dr [label="&dr"]
+  qb [label="%qb"]
+  dv [label="%dv"]
+  dx [label="%dx"]
+  qg [label="%qg"]
+  mc [label="%mc"]
+  mf [label="%mf"]
+  qm [label="%qm"]
+  ml [label="%ml"]
+  mz [label="%mz"]
+  vc [label="&vc"]
+  nb [label="%nb"]
+  nc [label="%nc"]
+  ng [label="%ng"]
+  nh [label="&nh"]
+  fc [label="%fc"]
+  vs [label="%vs"]
+  nn [label="%nn"]
+  bh [label="%bh"]
+  nv [label="%nv"]
+  bk [label="%bk"]
+  bm [label="%bm"]
+  jv [label="%jv"]
+  jx [label="&jx"]
+  sc [label="%sc"]
+  bs [label="%bs"]
+  bt [label="%bt"]
+  bv [label="%bv"]
+  sg [label="%sg"]
+  sj [label="%sj"]
+  sm [label="%sm"]
+  kf [label="%kf"]
+  kk [label="%kk"]
+  gk [label="%gk"]
+  gp [label="%gp"]
+  xc [label="%xc"]
+  cp [label="%cp"]
+  tb [label="%tb"]
+  gv [label="%gv"]
+  th [label="%th"]
+  pd [label="%pd"]
+  cx [label="%cx"]
+  xm [label="&xm"]
+  hb [label="%hb"]
+  lf [label="%lf"]
+  tn [label="&tn"]
+  lg [label="%lg"]
+  hd [label="&hd"]
+  lj [label="%lj"]
+  tr [label="&tr"]
+  xv [label="%xv"]
+  tt -> lp
+  tt -> tn
+  ln -> ps
+  ps -> hd
+  ps -> sg
+  broadcaster -> tb
+  broadcaster -> dv
+  broadcaster -> qg
+  broadcaster -> lf
+  lp -> tn
+  lp -> ng
+  dh -> rx
+  tz -> vc
+  tz -> mc
+  dr -> dh
+  qb -> bt
+  qb -> jx
+  dv -> jx
+  dv -> sm
+  dx -> jx
+  dx -> vs
+  qg -> sj
+  qg -> hd
+  mc -> vc
+  mf -> lg
+  qm -> kf
+  ml -> qb
+  ml -> jx
+  mz -> fc
+  vc -> tb
+  vc -> mf
+  vc -> dr
+  vc -> th
+  vc -> kk
+  vc -> bk
+  nb -> vc
+  nb -> hb
+  nc -> kk
+  nc -> vc
+  ng -> gp
+  nh -> dh
+  fc -> tt
+  vs -> qm
+  vs -> jx
+  nn -> nv
+  bh -> hd
+  bh -> cp
+  nv -> pd
+  nv -> tn
+  bk -> nc
+  bm -> tn
+  jv -> xc
+  jx -> sm
+  jx -> jv
+  jx -> xc
+  jx -> qm
+  jx -> dv
+  jx -> nh
+  jx -> kf
+  sc -> hd
+  bs -> lj
+  bt -> jx
+  bv -> ml
+  bv -> jx
+  sg -> gk
+  sg -> hd
+  sj -> ln
+  sj -> hd
+  sm -> jv
+  kf -> bv
+  kk -> nb
+  gk -> bs
+  gp -> tn
+  gp -> nn
+  xc -> dx
+  cp -> sc
+  cp -> hd
+  tb -> vc
+  tb -> th
+  gv -> vc
+  gv -> bk
+  th -> gv
+  pd -> tn
+  pd -> bm
+  cx -> bh
+  xm -> dh
+  hb -> vc
+  hb -> mf
+  lf -> tn
+  lf -> xv
+  tn -> lf
+  tn -> xv
+  tn -> xm
+  tn -> nn
+  tn -> mz
+  tn -> fc
+  tn -> ng
+  lg -> tz
+  lg -> vc
+  hd -> bs
+  hd -> gk
+  hd -> tr
+  hd -> qg
+  hd -> ln
+  hd -> cx
+  lj -> hd
+  lj -> cx
+  tr -> dh
+  xv -> mz
 }

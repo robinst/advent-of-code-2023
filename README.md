@@ -11,3 +11,9 @@ session token in `~/.adventofcode.session`.
 Then, for each day, run this:
 
     aoc download --input-only --input-file src/test/resources/dayNN.txt
+
+## Tips
+
+* Look at the real input, it might show patterns that the example doesn't
+* Look at the input with a minimap, there might be patterns
+* Look at the input as a graph
