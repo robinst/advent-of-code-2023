@@ -157,6 +157,17 @@ public class Day20 {
     static long solve2(String input) {
         var machines = Machines.parse(input);
 
+        var graphviz = Graphviz.directed().rankdir("LR");
+        for (Map.Entry<String, Module> entry : machines.modules.entrySet()) {
+            graphviz.node(entry.getKey(), switch (entry.getValue().type) {
+                case BROADCASTER -> "broadcaster";
+                case FLIP_FLOP -> "%" + entry.getKey();
+                case CONJUNCTION -> "&" + entry.getKey();
+            });
+            entry.getValue().destinations().forEach(d -> graphviz.edge(entry.getKey(), d));
+        }
+        graphviz.generate("day20");
+
         // Looked at the input: Only dh leads to rx, and dh requires low pulses on 4 input modules.
         // So to trigger a low pulse to rx, we need only high pulses to dh, which we get by having
         // all inputs send low pulses.
